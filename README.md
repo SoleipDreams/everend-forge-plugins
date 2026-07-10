@@ -1,4 +1,22 @@
-# Everend Plugins
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/everend-forge-logo-on-dark.png">
+    <img src="assets/everend-forge-logo-on-light.png" width="110" alt="Everend Forge mark">
+  </picture>
+</p>
+
+<h1 align="center">Everend Plugins</h1>
+<p align="center">
+  Runtime engine adapters for <a href="https://github.com/Everendforge/everend-forge">Everend Forge</a>.<br />
+  Consumes exported runtime packages without owning canon or authoring.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg" alt="License">
+  <a href="https://github.com/Everendforge/everend-forge"><img src="https://img.shields.io/badge/Everend%20Forge-open%20core%20suite-0a0e1a.svg" alt="Part of Everend Forge"></a>
+</p>
+
+---
 
 Everend Plugins coordinates runtime adapters for game engines and other execution environments.
 
