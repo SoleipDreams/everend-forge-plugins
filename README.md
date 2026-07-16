@@ -26,6 +26,8 @@ Plugins consume Everend runtime packages exported by PathBranching. They should 
 
 This repository currently contains roadmap and API documentation only. Engine plugin implementations have not started yet.
 
+The decision-complete implementation plan for the first PathBranching-to-Unity connection is documented in [Unity Live Bridge v0.1](docs/UNITY_LIVE_BRIDGE_PLAN.md). The initial compatibility profile targets the existing SINPO Unity and Ink workflow while preserving a portable engine-adapter boundary.
+
 ## Targets
 
 1. Unity

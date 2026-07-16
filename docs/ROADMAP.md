@@ -10,6 +10,8 @@ Everend Plugins are runtime adapters for game engines and other execution enviro
 
 Unity is the first target because it is the fastest way to validate the full runtime flow.
 
+The detailed architecture, synchronization contract, SINPO projection, adoption workflow, test plan, and release strategy are defined in [Unity Live Bridge v0.1](UNITY_LIVE_BRIDGE_PLAN.md).
+
 ## Plugin responsibilities
 
 - Import runtime packages.
@@ -48,12 +50,12 @@ The Unity prototype should:
 - Save and load state.
 - Report missing canon references and broken transitions.
 
-## Later split
+## Package and release strategy
 
-Once the runtime package is stable, split engine-specific repos:
+Keep adapters in this repository as independently versioned packages while the shared protocol and fixtures are being validated:
 
-- unity-plugin
-- godot-plugin
-- unreal-plugin
+- `com.everendforge.unity`
+- a future Godot package
+- a future Unreal package
 
-Until then, this repository can hold roadmap, examples, and shared adapter decisions.
+Use short-lived feature branches and engine-specific SemVer tags rather than permanent branches per engine. Reconsider separate repositories only when engines have independent maintainers or release cadence.
