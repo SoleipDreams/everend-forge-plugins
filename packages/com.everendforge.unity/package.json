@@ -1,0 +1,11 @@
+{
+  "name": "com.everendforge.unity",
+  "version": "0.1.0",
+  "displayName": "Everend Forge Narrative Gateway",
+  "description": "Neutral RuntimePackage importer, narrative catalog and projection profiles for Unity.",
+  "unity": "2022.3",
+  "keywords": ["narrative", "pathbranching", "ink", "everendforge"],
+  "author": {
+    "name": "Everend Forge"
+  }
+}

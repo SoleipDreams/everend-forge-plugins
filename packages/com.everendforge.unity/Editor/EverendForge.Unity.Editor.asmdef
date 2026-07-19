@@ -1,0 +1,14 @@
+{
+  "name": "EverendForge.Unity.Editor",
+  "rootNamespace": "EverendForge.Unity.Editor",
+  "references": ["EverendForge.Unity.Runtime"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

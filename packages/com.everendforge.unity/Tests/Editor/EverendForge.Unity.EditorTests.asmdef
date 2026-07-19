@@ -1,0 +1,13 @@
+{
+  "name": "EverendForge.Unity.EditorTests",
+  "rootNamespace": "EverendForge.Unity.Tests",
+  "references": [
+    "EverendForge.Unity.Runtime",
+    "EverendForge.Unity.Editor",
+    "UnityEditor.TestRunner",
+    "UnityEngine.TestRunner"
+  ],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

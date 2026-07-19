@@ -11,6 +11,10 @@
   Consumes exported runtime packages without owning canon or authoring.
 </p>
 
+## Unity Narrative Gateway MVP
+
+[`packages/com.everendforge.unity`](packages/com.everendforge.unity) is a local UPM package that imports the portable `RuntimePackage` contract into a neutral catalog and offers a configurable SINPO v0.1 projection. See its [installation and contract notes](packages/com.everendforge.unity/README.md).
+
 <p align="center">
   <img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg" alt="License">
   <a href="https://github.com/Everendforge/everend-forge"><img src="https://img.shields.io/badge/Everend%20Forge-open%20core%20suite-0a0e1a.svg" alt="Part of Everend Forge"></a>
