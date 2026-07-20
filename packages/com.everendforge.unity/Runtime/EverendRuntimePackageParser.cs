@@ -101,7 +101,9 @@ namespace EverendForge.Unity
                     SequenceId = String(item, "sequenceId"), BranchId = FirstString(item, "branchId", "branchRef"), Raw = item,
                     Text = text == null ? null : new EverendText { Format = String(text, "format"), Content = String(text, "content") },
                     Decisions = Decisions(Array(item, "decisions")), Transitions = Transitions(Array(item, "transitions")),
-                    DialogueBeats = Beats(Array(item, "dialogueBeats"))
+                    DialogueBeats = Beats(Array(item, "dialogueBeats")),
+                    Dialogues = Dialogues(Array(item, "dialogues")),
+                    DialogueStarts = DialogueStarts(Array(item, "dialogueStarts"))
                 });
             }
             return result;
@@ -162,6 +164,40 @@ namespace EverendForge.Unity
                     Id = RequiredString(item, "id", "dialogue beat"), Kind = String(item, "kind"),
                     ScriptId = String(reference, "scriptId"), BlockId = String(reference, "blockId"),
                     DisplayCondition = Condition(item, "displayCondition") ?? EverendCollection.EmptyObject
+                });
+            }
+            return result;
+        }
+
+        private static IReadOnlyList<EverendDialogue> Dialogues(List<object> values)
+        {
+            if (values == null) return EverendCollection.EmptyDialogues;
+            var result = new List<EverendDialogue>();
+            foreach (var value in values)
+            {
+                var item = RequireObject(value, "dialogue");
+                result.Add(new EverendDialogue
+                {
+                    Id = RequiredString(item, "id", "dialogue"), Title = String(item, "title"),
+                    EntryBeatId = String(item, "entryBeatId"), SpeakerRef = String(item, "speakerRef"),
+                    Beats = Beats(Array(item, "beats")),
+                    Availability = Condition(item, "availability") ?? EverendCollection.EmptyObject
+                });
+            }
+            return result;
+        }
+
+        private static IReadOnlyList<EverendDialogueStart> DialogueStarts(List<object> values)
+        {
+            if (values == null) return EverendCollection.EmptyDialogueStarts;
+            var result = new List<EverendDialogueStart>();
+            foreach (var value in values)
+            {
+                var item = RequireObject(value, "dialogue start");
+                result.Add(new EverendDialogueStart
+                {
+                    Id = RequiredString(item, "id", "dialogue start"), Source = String(item, "source"),
+                    Availability = Condition(item, "availability") ?? EverendCollection.EmptyObject
                 });
             }
             return result;

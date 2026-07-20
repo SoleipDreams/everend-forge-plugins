@@ -11,6 +11,8 @@ namespace EverendForge.Unity
         IReadOnlyList<EverendTransition> GetOutgoingTransitions(string nodeId);
         IReadOnlyList<EverendDecision> GetDecisions(string eventId);
         bool TryResolveText(string textKey, out string text);
+        bool TryGetScriptBlock(string scriptId, string blockId, out EverendScriptBlock block);
+        bool TryResolveBeatLine(EverendBeat beat, out string speakerRef, out string text);
         bool TryGetNativeArtifact(string profileId, string everendId, out EverendNativeArtifact artifact);
     }
 }

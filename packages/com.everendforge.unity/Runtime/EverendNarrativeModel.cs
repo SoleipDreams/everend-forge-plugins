@@ -56,7 +56,26 @@ namespace EverendForge.Unity
         public IReadOnlyList<EverendDecision> Decisions { get; internal set; }
         public IReadOnlyList<EverendTransition> Transitions { get; internal set; }
         public IReadOnlyList<EverendBeat> DialogueBeats { get; internal set; }
+        public IReadOnlyList<EverendDialogue> Dialogues { get; internal set; }
+        public IReadOnlyList<EverendDialogueStart> DialogueStarts { get; internal set; }
         public IReadOnlyDictionary<string, object> Raw { get; internal set; }
+    }
+
+    public sealed class EverendDialogue
+    {
+        public string Id { get; internal set; }
+        public string Title { get; internal set; }
+        public string EntryBeatId { get; internal set; }
+        public string SpeakerRef { get; internal set; }
+        public IReadOnlyList<EverendBeat> Beats { get; internal set; }
+        public IReadOnlyDictionary<string, object> Availability { get; internal set; }
+    }
+
+    public sealed class EverendDialogueStart
+    {
+        public string Id { get; internal set; }
+        public string Source { get; internal set; }
+        public IReadOnlyDictionary<string, object> Availability { get; internal set; }
     }
 
     public sealed class EverendText
@@ -133,6 +152,8 @@ namespace EverendForge.Unity
         public static readonly IReadOnlyList<EverendOutcome> EmptyOutcomes = Array.Empty<EverendOutcome>();
         public static readonly IReadOnlyList<EverendTransition> EmptyTransitions = Array.Empty<EverendTransition>();
         public static readonly IReadOnlyList<EverendBeat> EmptyBeats = Array.Empty<EverendBeat>();
+        public static readonly IReadOnlyList<EverendDialogue> EmptyDialogues = Array.Empty<EverendDialogue>();
+        public static readonly IReadOnlyList<EverendDialogueStart> EmptyDialogueStarts = Array.Empty<EverendDialogueStart>();
         public static readonly IReadOnlyList<EverendScriptDocument> EmptyDocuments = Array.Empty<EverendScriptDocument>();
         public static readonly IReadOnlyList<EverendScriptBlock> EmptyBlocks = Array.Empty<EverendScriptBlock>();
         public static readonly IReadOnlyList<IReadOnlyDictionary<string, object>> EmptyConsequences = Array.Empty<IReadOnlyDictionary<string, object>>();

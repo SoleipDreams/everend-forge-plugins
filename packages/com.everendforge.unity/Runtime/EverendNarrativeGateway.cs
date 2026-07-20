@@ -29,6 +29,19 @@ namespace EverendForge.Unity
             if (string.IsNullOrWhiteSpace(textKey)) return false;
             return Package.Localizations.TryGetValue(textKey, out text);
         }
+        public bool TryGetScriptBlock(string scriptId, string blockId, out EverendScriptBlock block) => catalog.TryGetBlock(scriptId, blockId, out block);
+        public bool TryResolveBeatLine(EverendBeat beat, out string speakerRef, out string text)
+        {
+            speakerRef = null; text = null;
+            if (beat == null) return false;
+            EverendScriptBlock block;
+            if (!catalog.TryGetBlock(beat.ScriptId, beat.BlockId, out block)) return false;
+            speakerRef = string.IsNullOrWhiteSpace(block.CharacterRef) ? block.SpeakerRef : block.CharacterRef;
+            var textKey = string.IsNullOrWhiteSpace(block.TextKey) ? "script." + beat.ScriptId + "." + beat.BlockId : block.TextKey;
+            if (TryResolveText(textKey, out text)) return true;
+            text = block.Content;
+            return !string.IsNullOrEmpty(text);
+        }
         public bool TryGetNativeArtifact(string profileId, string everendId, out EverendNativeArtifact artifact)
         {
             foreach (var manifest in manifests)

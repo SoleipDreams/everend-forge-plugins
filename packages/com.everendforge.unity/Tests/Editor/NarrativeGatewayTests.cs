@@ -5,7 +5,7 @@ namespace EverendForge.Unity.Tests
 {
     public sealed class NarrativeGatewayTests
     {
-        private static readonly string Fixture = "{\"specVersion\":\"0.1\",\"packageId\":\"ridina-mvp\",\"primaryLocale\":\"es\",\"variables\":{\"trust\":0},\"pathBranching\":{\"projectId\":\"sinpo\",\"entrySequenceId\":\"seq-ridina\",\"externalFunctions\":[\"SetNextEvent\"],\"sequences\":[{\"id\":\"seq-ridina\",\"name\":\"Ridina\",\"characterRef\":\"ridina\",\"entryEventId\":\"evt-start\",\"eventIds\":[\"evt-start\",\"evt-end\"],\"branchIds\":[\"branch-mvp\"]}],\"branches\":[{\"id\":\"branch-mvp\",\"title\":\"MVP\",\"description\":\"\",\"sequenceId\":\"seq-ridina\",\"eventIds\":[\"evt-start\",\"evt-end\"]}],\"scriptDocuments\":[{\"id\":\"script-1\",\"blocks\":[{\"id\":\"line-1\",\"kind\":\"dialogue\",\"content\":\"Hola\",\"speakerRef\":\"ridina\"}]}],\"events\":[{\"id\":\"evt-start\",\"name\":\"Inicio\",\"type\":\"normal\",\"sequenceId\":\"seq-ridina\",\"branchId\":\"branch-mvp\",\"dialogueBeats\":[{\"id\":\"beat-1\",\"blockRef\":{\"scriptId\":\"script-1\",\"blockId\":\"line-1\"}}],\"decisions\":[{\"id\":\"decision-1\",\"outcomes\":[{\"id\":\"yes\",\"visibleText\":\"Continuar\",\"consequences\":[{\"type\":\"setVariable\",\"variable\":\"trust\",\"value\":1}],\"targetNodeId\":\"evt-end\"}]}],\"transitions\":[{\"id\":\"go-end\",\"from\":\"evt-start\",\"to\":\"evt-end\",\"order\":0}]},{\"id\":\"evt-end\",\"name\":\"Fin\",\"type\":\"final\",\"sequenceId\":\"seq-ridina\",\"branchId\":\"branch-mvp\",\"decisions\":[],\"transitions\":[]}]}}";
+        private static readonly string Fixture = "{\"specVersion\":\"0.1\",\"packageId\":\"ridina-mvp\",\"primaryLocale\":\"es\",\"variables\":{\"trust\":0},\"pathBranching\":{\"projectId\":\"sinpo\",\"entrySequenceId\":\"seq-ridina\",\"externalFunctions\":[\"SetNextEvent\"],\"sequences\":[{\"id\":\"seq-ridina\",\"name\":\"Ridina\",\"characterRef\":\"ridina\",\"entryEventId\":\"evt-start\",\"eventIds\":[\"evt-start\",\"evt-end\"],\"branchIds\":[\"branch-mvp\"]}],\"branches\":[{\"id\":\"branch-mvp\",\"title\":\"MVP\",\"description\":\"\",\"sequenceId\":\"seq-ridina\",\"eventIds\":[\"evt-start\",\"evt-end\"]}],\"scriptDocuments\":[{\"id\":\"script-1\",\"blocks\":[{\"id\":\"line-1\",\"kind\":\"dialogue\",\"content\":\"Hola\",\"speakerRef\":\"ridina\"},{\"id\":\"line-2\",\"kind\":\"dialogue\",\"content\":\"¿Lista para continuar?\",\"speakerRef\":\"ridina\"}]}],\"events\":[{\"id\":\"evt-start\",\"name\":\"Inicio\",\"type\":\"normal\",\"sequenceId\":\"seq-ridina\",\"branchId\":\"branch-mvp\",\"dialogueBeats\":[{\"id\":\"beat-1\",\"blockRef\":{\"scriptId\":\"script-1\",\"blockId\":\"line-1\"}}],\"dialogueStarts\":[{\"id\":\"start-1\",\"source\":\"auto\"}],\"dialogues\":[{\"id\":\"dlg-1\",\"title\":\"Charla\",\"entryBeatId\":\"beat-2\",\"beats\":[{\"id\":\"beat-2\",\"kind\":\"speech\",\"blockRef\":{\"scriptId\":\"script-1\",\"blockId\":\"line-2\"}}]}],\"decisions\":[{\"id\":\"decision-1\",\"outcomes\":[{\"id\":\"yes\",\"visibleText\":\"Continuar\",\"consequences\":[{\"type\":\"setVariable\",\"variable\":\"trust\",\"value\":1}],\"targetNodeId\":\"evt-end\"}]}],\"transitions\":[{\"id\":\"go-end\",\"from\":\"evt-start\",\"to\":\"evt-end\",\"order\":0},{\"id\":\"start-to-dlg\",\"from\":\"dialogue-start:evt-start:start-1\",\"to\":\"dialogue:evt-start:dlg-1\",\"order\":0}]},{\"id\":\"evt-end\",\"name\":\"Fin\",\"type\":\"final\",\"sequenceId\":\"seq-ridina\",\"branchId\":\"branch-mvp\",\"decisions\":[],\"transitions\":[]}]}}";
 
         [Test]
         public void Gateway_IndexesEveryPortableObject()
@@ -17,6 +17,25 @@ namespace EverendForge.Unity.Tests
             Assert.That(gateway.TryGetBranch("branch-mvp", out _), Is.True);
             Assert.That(gateway.TryGetEvent("evt-start", out var narrativeEvent), Is.True);
             Assert.That(gateway.GetOutgoingTransitions(narrativeEvent.Id), Has.Count.EqualTo(1));
+            Object.DestroyImmediate(catalog); Object.DestroyImmediate(package);
+        }
+
+        [Test]
+        public void Gateway_ExposesDialogueContainersAndBeatLines()
+        {
+            var package = ScriptableObject.CreateInstance<EverendRuntimePackageAsset>(); package.Replace(Fixture, "test");
+            var catalog = ScriptableObject.CreateInstance<EverendNarrativeCatalog>(); catalog.Rebuild(package);
+            var gateway = new EverendNarrativeGateway(catalog);
+            Assert.That(gateway.TryGetEvent("evt-start", out var narrativeEvent), Is.True);
+            Assert.That(narrativeEvent.DialogueStarts, Has.Count.EqualTo(1));
+            Assert.That(narrativeEvent.Dialogues, Has.Count.EqualTo(1));
+            var dialogue = narrativeEvent.Dialogues[0];
+            Assert.That(dialogue.EntryBeatId, Is.EqualTo("beat-2"));
+            Assert.That(dialogue.Beats, Has.Count.EqualTo(1));
+            Assert.That(gateway.TryResolveBeatLine(dialogue.Beats[0], out var speaker, out var line), Is.True);
+            Assert.That(speaker, Is.EqualTo("ridina"));
+            Assert.That(line, Is.EqualTo("¿Lista para continuar?"));
+            Assert.That(gateway.GetOutgoingTransitions("dialogue-start:evt-start:start-1"), Has.Count.EqualTo(1));
             Object.DestroyImmediate(catalog); Object.DestroyImmediate(package);
         }
 
