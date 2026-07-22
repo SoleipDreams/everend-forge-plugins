@@ -111,6 +111,7 @@ namespace EverendForge.Unity
         public string Label { get; internal set; }
         public int Order { get; internal set; }
         public string Mode { get; internal set; }
+        public string Role { get; internal set; }
         public IReadOnlyDictionary<string, object> Conditions { get; internal set; }
         public IReadOnlyList<IReadOnlyDictionary<string, object>> Consequences { get; internal set; }
     }

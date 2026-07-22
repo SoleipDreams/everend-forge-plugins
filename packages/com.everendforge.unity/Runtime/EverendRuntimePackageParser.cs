@@ -120,12 +120,13 @@ namespace EverendForge.Unity
                 foreach (var outcomeValue in Array(item, "outcomes") ?? new List<object>())
                 {
                     var outcome = RequireObject(outcomeValue, "decision outcome");
+                    var logic = Object(outcome, "logic");
                     outcomes.Add(new EverendOutcome
                     {
                         Id = RequiredString(outcome, "id", "decision outcome"), Name = String(outcome, "name"),
                         VisibleText = String(outcome, "visibleText"), TargetNodeId = String(outcome, "targetNodeId"),
-                        Availability = Condition(outcome, "availability", "conditions") ?? EverendCollection.EmptyObject,
-                        Consequences = ObjectList(Array(outcome, "consequences"))
+                        Availability = Condition(logic, "when") ?? Condition(outcome, "availability", "conditions") ?? EverendCollection.EmptyObject,
+                        Consequences = ObjectList(Array(logic, "then") ?? Array(outcome, "consequences"))
                     });
                 }
                 result.Add(new EverendDecision { Id = RequiredString(item, "id", "decision"), Name = String(item, "name"), Description = String(item, "description"), Type = String(item, "type"), Outcomes = outcomes });
@@ -140,12 +141,13 @@ namespace EverendForge.Unity
             foreach (var value in values)
             {
                 var item = RequireObject(value, "transition");
+                var logic = Object(item, "logic");
                 result.Add(new EverendTransition
                 {
                     Id = RequiredString(item, "id", "transition"), From = String(item, "from"), To = String(item, "to"),
-                    Label = String(item, "label"), Mode = String(item, "mode"), Order = Int(item, "order"),
-                    Conditions = Condition(item, "conditions", "condition") ?? EverendCollection.EmptyObject,
-                    Consequences = ObjectList(Array(item, "consequences"))
+                    Label = String(item, "label"), Mode = String(item, "mode"), Role = String(item, "role"), Order = Int(item, "order"),
+                    Conditions = Condition(logic, "when") ?? Condition(item, "conditions", "condition") ?? EverendCollection.EmptyObject,
+                    Consequences = ObjectList(Array(logic, "then") ?? Array(item, "consequences"))
                 });
             }
             return result;
@@ -159,11 +161,12 @@ namespace EverendForge.Unity
             {
                 var item = RequireObject(value, "dialogue beat");
                 var reference = Object(item, "blockRef");
+                var logic = Object(item, "logic");
                 result.Add(new EverendBeat
                 {
                     Id = RequiredString(item, "id", "dialogue beat"), Kind = String(item, "kind"),
                     ScriptId = String(reference, "scriptId"), BlockId = String(reference, "blockId"),
-                    DisplayCondition = Condition(item, "displayCondition") ?? EverendCollection.EmptyObject
+                    DisplayCondition = Condition(logic, "when") ?? Condition(item, "displayCondition") ?? EverendCollection.EmptyObject
                 });
             }
             return result;
@@ -176,12 +179,13 @@ namespace EverendForge.Unity
             foreach (var value in values)
             {
                 var item = RequireObject(value, "dialogue");
+                var logic = Object(item, "logic");
                 result.Add(new EverendDialogue
                 {
                     Id = RequiredString(item, "id", "dialogue"), Title = String(item, "title"),
                     EntryBeatId = String(item, "entryBeatId"), SpeakerRef = String(item, "speakerRef"),
                     Beats = Beats(Array(item, "beats")),
-                    Availability = Condition(item, "availability") ?? EverendCollection.EmptyObject
+                    Availability = Condition(logic, "when") ?? Condition(item, "availability") ?? EverendCollection.EmptyObject
                 });
             }
             return result;
@@ -194,10 +198,11 @@ namespace EverendForge.Unity
             foreach (var value in values)
             {
                 var item = RequireObject(value, "dialogue start");
+                var logic = Object(item, "logic");
                 result.Add(new EverendDialogueStart
                 {
                     Id = RequiredString(item, "id", "dialogue start"), Source = String(item, "source"),
-                    Availability = Condition(item, "availability") ?? EverendCollection.EmptyObject
+                    Availability = Condition(logic, "when") ?? Condition(item, "availability") ?? EverendCollection.EmptyObject
                 });
             }
             return result;

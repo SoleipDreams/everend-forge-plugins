@@ -34,6 +34,7 @@ namespace EverendForge.Unity.Editor
             {
                 if (string.IsNullOrWhiteSpace(transition.To)) result.Errors.Add("Transition '" + transition.Id + "' has no target.");
                 else if (!story.Events.Any(x => x.Id == transition.To) && !story.Events.SelectMany(x => x.DialogueBeats).Any(x => x.Id == transition.To)) result.Warnings.Add("Transition '" + transition.Id + "' targets '" + transition.To + "', which is not an exported event or beat.");
+                if (string.Equals(transition.Role, "flow", StringComparison.OrdinalIgnoreCase) && (transition.Conditions.Count > 0 || transition.Consequences.Count > 0 || string.Equals(transition.Mode, "fallback", StringComparison.OrdinalIgnoreCase))) result.Errors.Add("Flow transition '" + transition.Id + "' contains route logic. Export it as role 'route'.");
             }
             return result;
         }
