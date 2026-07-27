@@ -3,9 +3,7 @@
   "rootNamespace": "EverendForge.Unity.Tests",
   "references": [
     "EverendForge.Unity.Runtime",
-    "EverendForge.Unity.Editor",
-    "UnityEditor.TestRunner",
-    "UnityEngine.TestRunner"
+    "EverendForge.Unity.Editor"
   ],
   "includePlatforms": ["Editor"],
   "optionalUnityReferences": ["TestAssemblies"],

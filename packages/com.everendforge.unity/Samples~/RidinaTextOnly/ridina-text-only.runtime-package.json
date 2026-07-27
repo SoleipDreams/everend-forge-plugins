@@ -1,0 +1,109 @@
+{
+  "specVersion": "0.1",
+  "packageId": "ridina-text-only-mvp",
+  "primaryLocale": "es",
+  "variables": {
+    "trust": 0
+  },
+  "pathBranching": {
+    "projectId": "sinpo",
+    "entrySequenceId": "sequence:ridina",
+    "sequences": [
+      {
+        "id": "sequence:ridina",
+        "name": "Ridina",
+        "characterRef": "ridina",
+        "entryEventId": "event:ridina:start",
+        "eventIds": ["event:ridina:start", "event:ridina:end"],
+        "branchIds": ["branch:ridina:mvp"]
+      }
+    ],
+    "branches": [
+      {
+        "id": "branch:ridina:mvp",
+        "title": "Ridina — prueba textual",
+        "description": "Muestra de importación y lectura sin Ink ni presentación visual.",
+        "sequenceId": "sequence:ridina",
+        "eventIds": ["event:ridina:start", "event:ridina:end"]
+      }
+    ],
+    "scriptDocuments": [
+      {
+        "id": "script:ridina:mvp",
+        "name": "Ridina MVP",
+        "format": "plain-text",
+        "blocks": [
+          {
+            "id": "line:welcome",
+            "kind": "dialogue",
+            "content": "Esta es una lectura de prueba de la rama de Ridina.",
+            "speakerRef": "ridina"
+          },
+          {
+            "id": "line:continue",
+            "kind": "dialogue",
+            "content": "El sistema solo muestra texto y decisiones por ahora.",
+            "speakerRef": "ridina"
+          }
+        ]
+      }
+    ],
+    "events": [
+      {
+        "id": "event:ridina:start",
+        "name": "Inicio",
+        "type": "normal",
+        "sequenceId": "sequence:ridina",
+        "branchId": "branch:ridina:mvp",
+        "dialogueBeats": [
+          {
+            "id": "beat:welcome",
+            "kind": "speech",
+            "blockRef": {
+              "scriptId": "script:ridina:mvp",
+              "blockId": "line:welcome"
+            }
+          },
+          {
+            "id": "beat:continue",
+            "kind": "speech",
+            "blockRef": {
+              "scriptId": "script:ridina:mvp",
+              "blockId": "line:continue"
+            }
+          }
+        ],
+        "decisions": [
+          {
+            "id": "decision:continue",
+            "name": "¿Continuar?",
+            "outcomes": [
+              {
+                "id": "outcome:continue",
+                "visibleText": "Continuar",
+                "consequences": [
+                  {
+                    "type": "setVariable",
+                    "variable": "trust",
+                    "value": 1
+                  }
+                ],
+                "targetNodeId": "event:ridina:end"
+              }
+            ]
+          }
+        ],
+        "transitions": []
+      },
+      {
+        "id": "event:ridina:end",
+        "name": "Fin",
+        "type": "final",
+        "sequenceId": "sequence:ridina",
+        "branchId": "branch:ridina:mvp",
+        "decisions": [],
+        "transitions": []
+      }
+    ]
+  }
+}

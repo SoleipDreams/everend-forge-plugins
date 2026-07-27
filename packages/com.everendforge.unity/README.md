@@ -16,6 +16,12 @@ Then open `Everend Forge > Import RuntimePackage...`, select the exported JSON, 
 - **Dry-run SINPO projection**: reports files and assets that would be created or updated.
 - **Apply SINPO projection**: writes generated Ink and creates/updates the isolated projection folder.
 
+## Text-only Ridina smoke test
+
+`Samples~/RidinaTextOnly/ridina-text-only.runtime-package.json` is a self-contained, non-canonical smoke-test package for the Ridina route. It intentionally has no Ink, Addressables, portraits, backgrounds or audio. Copy it into a Unity project's `Assets/` folder, open **Everend Forge > Import RuntimePackage...**, and use **Import catalog**.
+
+In SINPO, assign that JSON (or the imported `EverendNarrativeCatalog`) to `EverendTextStoryPlayer`, set **Start Branch Id** to `branch:ridina:mvp`, and enter Play Mode. The player renders only plain text and choices. Its branch boundary prevents a transition from silently continuing into another route. A real Ridina export from PathBranching can replace this sample without changing the setup, as long as it retains the portable `runtime-package.json` contract.
+
 ## SINPO v0.1 contract
 
 The adapter resolves `SequenceData`, `BranchData`, and `EventsData` by type name at editor time and writes only these narrative fields:
