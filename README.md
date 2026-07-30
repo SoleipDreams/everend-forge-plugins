@@ -7,7 +7,7 @@
 
 <h1 align="center">Everend Plugins</h1>
 <p align="center">
-  Runtime engine adapters for <a href="https://github.com/Everendforge/everend-forge">Everend Forge</a>.<br />
+  Runtime engine adapters for <a href="https://github.com/SoleipDreams/everend-forge">Everend Forge</a>.<br />
   Consumes exported runtime packages without owning canon or authoring.
 </p>
 
@@ -17,7 +17,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg" alt="License">
-  <a href="https://github.com/Everendforge/everend-forge"><img src="https://img.shields.io/badge/Everend%20Forge-open%20core%20suite-0a0e1a.svg" alt="Part of Everend Forge"></a>
+  <a href="https://github.com/SoleipDreams/everend-forge"><img src="https://img.shields.io/badge/Everend%20Forge-open%20core%20suite-0a0e1a.svg" alt="Part of Everend Forge"></a>
 </p>
 
 ---
@@ -51,9 +51,9 @@ The decision-complete implementation plan for the first PathBranching-to-Unity c
 
 ## Related Repositories
 
-- [Everend Forge portal](https://github.com/Everendforge/everend-forge)
-- [Everend Spec](https://github.com/Everendforge/spec)
-- [Everend PathBranching](https://github.com/Everendforge/pathbranching)
+- [Everend Forge portal](https://github.com/SoleipDreams/everend-forge)
+- [Everend Spec](https://github.com/SoleipDreams/spec)
+- [Everend PathBranching](https://github.com/SoleipDreams/pathbranching)
 
 ## License
 
