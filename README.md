@@ -58,3 +58,7 @@ The decision-complete implementation plan for the first PathBranching-to-Unity c
 ## License
 
 Code is licensed under MIT OR Apache-2.0. Documentation is licensed under CC BY 4.0 unless stated otherwise.
+
+## Support
+
+If Everend Forge is useful to you, you can support its development on [Ko-fi](https://ko-fi.com/heinzdbv).
