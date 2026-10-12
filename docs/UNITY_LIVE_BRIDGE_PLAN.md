@@ -45,7 +45,7 @@ PathBranching story and narrative graph
        |
        | runtime package + SINPO projection + change sets
        v
-PathBranching local bridge server
+Shared everend-forge-bridge sidecar
        |
        | WebSocket over loopback
        v
@@ -173,9 +173,9 @@ Unity stores a version-controlled manifest at `ProjectSettings/EverendForgeSync.
 
 Legacy IDs are scoped by sequence. The Everend stable ID is the only cross-engine identity.
 
-## Connection server
+## Connection sidecar
 
-PathBranching's Tauri backend hosts the bridge:
+The bridge is distributed as one standalone sidecar runtime shared by PathBranching and Unity. Neither React nor the Unity package reimplements the server. Whichever application is open can start the bundled sidecar; if the loopback session already exists, it connects to that instance instead of spawning a second one:
 
 - bind only to `127.0.0.1`
 - default port `47831`, configurable when occupied
@@ -194,7 +194,7 @@ Unity uses `System.Net.WebSockets.ClientWebSocket`, serializes send operations, 
 
 Replace the current "Coming soon" Unity card with:
 
-- start/stop server controls
+- start/stop sidecar controls
 - bind address and port
 - pairing code and paired-project list
 - connection, adapter, engine, profile, and revision status
@@ -345,7 +345,7 @@ During Play Mode, imported assets may refresh, but the active Ink `Story` instan
 ### Phase 3: PathBranching bridge
 
 - Add the contract types and SINPO exporter.
-- Implement the Tauri loopback server and pairing store.
+- Implement Tauri sidecar control and pairing store.
 - Replace the Connect placeholder with operational UI.
 - Emit snapshots and granular changes from the same normalized project state used for export.
 
