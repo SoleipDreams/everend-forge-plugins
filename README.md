@@ -7,13 +7,22 @@
 
 <h1 align="center">Everend Plugins</h1>
 <p align="center">
-  Runtime engine adapters for <a href="https://github.com/Everendforge/everend-forge">Everend Forge</a>.<br />
+  Runtime engine adapters for <a href="https://github.com/SoleipDreams/everend-forge">Everend Forge</a>.<br />
   Consumes exported runtime packages without owning canon or authoring.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg" alt="License">
-  <a href="https://github.com/Everendforge/everend-forge"><img src="https://img.shields.io/badge/Everend%20Forge-open%20core%20suite-0a0e1a.svg" alt="Part of Everend Forge"></a>
+  <img src="https://img.shields.io/badge/code-MIT%20OR%20Apache--2.0-blue.svg" alt="Code license: MIT OR Apache-2.0">
+  <img src="https://img.shields.io/badge/docs-CC%20BY%204.0-blue.svg" alt="Documentation license: CC BY 4.0">
+</p>
+
+## Unity Narrative Gateway MVP
+
+[`packages/com.everendforge.unity`](packages/com.everendforge.unity) is a local UPM package that imports the portable `RuntimePackage` contract into a neutral catalog and offers a configurable SINPO v0.1 projection. See its [installation and contract notes](packages/com.everendforge.unity/README.md).
+
+<p align="center">
+  <a href="README.es.md">Español</a> ·
+  <a href="https://github.com/SoleipDreams/everend-forge"><img src="https://img.shields.io/badge/part%20of-Everend%20Forge-0a0e1a.svg" alt="Part of Everend Forge"></a>
 </p>
 
 ---
@@ -25,6 +34,8 @@ Plugins consume Everend runtime packages exported by PathBranching. They should 
 ## Current Status
 
 This repository currently contains roadmap and API documentation only. Engine plugin implementations have not started yet.
+
+The decision-complete implementation plan for the first PathBranching-to-Unity connection is documented in [Unity Live Bridge v0.1](docs/UNITY_LIVE_BRIDGE_PLAN.md). The initial compatibility profile targets the existing SINPO Unity and Ink workflow while preserving a portable engine-adapter boundary.
 
 ## Targets
 
@@ -45,14 +56,16 @@ This repository currently contains roadmap and API documentation only. Engine pl
 
 ## Related Repositories
 
-- [Everend Forge portal](https://github.com/Everendforge/everend-forge)
-- [Everend Spec](https://github.com/Everendforge/spec)
-- [Everend PathBranching](https://github.com/Everendforge/pathbranching)
+- [Everend Forge portal](https://github.com/SoleipDreams/everend-forge)
+- [Everend Spec](https://github.com/SoleipDreams/everend-forge-specs)
+- [Everend PathBranching](https://github.com/SoleipDreams/everend-forge-pathbranching)
+- [Everend WorldNotion](https://github.com/SoleipDreams/everend-forge-worldnotion)
 
 ## License
 
-Code is licensed under MIT OR Apache-2.0. Documentation is licensed under CC BY 4.0 unless stated otherwise.
+Code is licensed under either MIT or Apache-2.0; documentation is CC BY 4.0. Preserve required legal notices when redistributing. See [license scope](LICENSE), [MIT](LICENSE-MIT), [Apache-2.0](LICENSE-APACHE), [CC BY 4.0](LICENSE-CC-BY-4.0), and the separate [brand policy](TRADEMARKS.md).
 
 ## Support
 
 If Everend Forge is useful to you, you can support its development on [Ko-fi](https://ko-fi.com/heinzdbv).
+
